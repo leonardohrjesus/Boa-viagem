@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class DashboardActivity  extends AppCompatActivity {
 
     private String opcao;
+    private TextView textView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +27,17 @@ public class DashboardActivity  extends AppCompatActivity {
         switch (view.getId()) {
              case R.id.nova_viagem:
                  startActivity(new Intent(this, ViagemActivity.class));
-                 TextView textView = (TextView) view;
+                 textView = (TextView) view;
                  opcao = "Opção: " + textView.getText().toString();
                  Toast.makeText(this, opcao, Toast.LENGTH_LONG).show();
                  break;
+            case R.id.novo_gasto:
+                startActivity(new Intent(this, ViagemActivity.class));
+                textView = (TextView) view;
+                opcao = "Opção: " + textView.getText().toString();
+                Toast.makeText(this, opcao, Toast.LENGTH_LONG).show();
+                break;
+
             }
 
 
