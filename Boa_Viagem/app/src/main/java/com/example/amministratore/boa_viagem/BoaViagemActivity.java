@@ -1,13 +1,15 @@
 package com.example.amministratore.boa_viagem;
 
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-    public class BoaViagemActivity extends AppCompatActivity {
+    public class BoaViagemActivity extends AppCompatActivity
+    {
 
     private EditText usuario;
     private EditText senha;
