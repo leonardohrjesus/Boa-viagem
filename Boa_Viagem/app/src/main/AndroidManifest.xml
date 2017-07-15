@@ -23,6 +23,13 @@
         <activity
             android:label="@string/app_name"
             android:name=".ViagemActivity" />
-        <activity android:name=".GastoActivity"/>
+        <activity
+            android:label="@string/app_name"
+            android:name=".GastoActivity"/>
+
+        <activity android:name=".ViagemListActivity"/>
+        <activity
+            android:label="@string/app_name"
+            android:name=".GastoListActivity"/>
     </application>
 </manifest>

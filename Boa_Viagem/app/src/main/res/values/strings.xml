@@ -13,7 +13,7 @@
     <string name="lazer">Lazer</string>
     <string name="negocios">Negocios</string>
     <string name="data_da_chegada">Data de Chegada</string>
-    <string name="data_da_saida">Data de Saida</string>
+    <string name="data_da_saida">  Data de Saida</string>
     <string name="orcamento">Orçamento</string>
     <string name="quantidade_de_pessoas">Quantidades de Pesssoas</string>
     <string name="salvar">Salvar</string>
@@ -24,6 +24,15 @@
     <string name="gastei">Gastei</string>
     <string name="descricao">Descriçao</string>
     <string name="categoria">Categoria</string>
+    <string name="sair">Sair</string>
+    <string name="remover_viagem">Remover Viagem</string>
+    <string name="remover">Remover</string>
+    <string name="gastos_realizados">Gasto realizados</string>
+    <string name="editar">Editar</string>
+    <string name="opcoes">Opcoes</string>
+    <string name="confirmacao_exclusao_viagem">Confiramcao da exclusao da viagem</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Nao</string>
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
         <item>Combustível</item>
