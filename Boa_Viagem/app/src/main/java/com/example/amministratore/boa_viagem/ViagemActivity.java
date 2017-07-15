@@ -13,6 +13,8 @@ import android.view.MenuItem;
 
 public class ViagemActivity extends AppCompatActivity {
 
+
+    //metodo de criacao
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +23,16 @@ public class ViagemActivity extends AppCompatActivity {
 
     }
 
+
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.viagem_menu, menu);
         return true;
     }
+
+    //selecionar opcao do menu
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
