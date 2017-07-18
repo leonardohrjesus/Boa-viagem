@@ -48,6 +48,12 @@ public class DashboardActivity  extends AppCompatActivity {
                 opcao = "Opção: " + textView.getText().toString();
                 Toast.makeText(this, opcao, Toast.LENGTH_LONG).show();
                 break;
+            case R.id.configuracoes:
+                startActivity(new Intent(this, ConfiguracoesActivity.class));
+                textView = (TextView) view;
+                opcao = "Opção: " + textView.getText().toString();
+                Toast.makeText(this, opcao, Toast.LENGTH_LONG).show();
+                break;
 
         }
     }

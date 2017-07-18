@@ -25,6 +25,8 @@ import java.util.Map;
 
 public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener , DialogInterface.OnClickListener {
 
+
+
     private AlertDialog dialogConfirmacao;
     private int viagemSelecionada;
     private AlertDialog alertDialog;

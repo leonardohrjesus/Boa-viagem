@@ -31,5 +31,8 @@
         <activity
             android:label="@string/app_name"
             android:name=".GastoListActivity"/>
+        <activity
+            android:label="@string/app_name"
+            android:name=".ConfiguracoesActivity"/>
     </application>
 </manifest>
