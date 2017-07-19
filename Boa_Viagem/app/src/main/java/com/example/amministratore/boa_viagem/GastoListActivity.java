@@ -128,7 +128,7 @@ public class GastoListActivity extends ListActivity implements AdapterView.OnIte
 
     private AlertDialog criaDialogConfirmacao() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.confirmacao_exclusao_viagem);
+        builder.setMessage(R.string.confirmacao_exclusao_gasto);
         builder.setPositiveButton(getString(R.string.sim), this);
         builder.setNegativeButton(getString(R.string.nao),  this);
         return builder.create();

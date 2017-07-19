@@ -42,6 +42,7 @@
     <string name="manter_conectado">Manter Conectado</string>
     <string name="registro_salvo">Registro Salvo</string>
     <string name="erro_salvar">Erro Salvar</string>
+    <string name="confirmacao_exclusao_gasto">Confirmacao de exclusao de Gasto</string>
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
         <item>Combustível</item>

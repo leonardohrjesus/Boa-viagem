@@ -3,6 +3,7 @@
     package="com.example.amministratore.boa_viagem"
     >
     <application
+        android:debuggable="true"
         android:theme="@style/Theme.AppCompat">
     <activity
         android:label="@string/app_name"

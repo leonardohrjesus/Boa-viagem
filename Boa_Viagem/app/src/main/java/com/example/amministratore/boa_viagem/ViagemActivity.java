@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.os.Build;
@@ -22,13 +23,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 
 import static com.example.amministratore.boa_viagem.R.id.dataChegada;
 import static com.example.amministratore.boa_viagem.R.id.dataSaida;
+
 
 /**
  * Created by Amministratore on 11/07/2017.
@@ -37,13 +37,14 @@ import static com.example.amministratore.boa_viagem.R.id.dataSaida;
 public class ViagemActivity extends AppCompatActivity {
     private int ano, mes, dia;
     private int ano1, mes1, dia1;
-
+    private String id;
     private Button dataChegadaButton;
     private Button dataSaidaButton;
 
     private DatabaseHelper helper;
     private EditText destino, quantidadePessoas, orcamento;
     private RadioGroup radioGroup;
+
 
 
     //metodo de criacao
@@ -78,6 +79,13 @@ public class ViagemActivity extends AppCompatActivity {
         helper = new DatabaseHelper(this);
 
 
+        id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+
+        if(id != null){
+            prepararEdicao();
+        }
+
+
     }
 
     public void selecionarData(View view){
@@ -86,11 +94,11 @@ public class ViagemActivity extends AppCompatActivity {
 
    @Override
     protected Dialog onCreateDialog(int id) {
-        if(R.id.dataChegada == id ){
+        if(dataChegada == id ){
             return new DatePickerDialog(this, listener, ano, mes, dia);
         }
 
-        else if( R.id.dataSaida == id){
+        else if( dataSaida == id){
             return new DatePickerDialog(this, listener1, ano1, mes1, dia1);
         }
         return null;
@@ -172,6 +180,29 @@ public class ViagemActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+
+    private void prepararEdicao() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor =
+                db.rawQuery("SELECT tipo_viagem, destino, data_chegada, " +
+                        "data_saida, quantidade_pessoas, orcamento " +
+                        "FROM viagem WHERE _id = ?", new String[]{ id });
+        cursor.moveToFirst();
+        if(cursor.getInt(0) == Constantes.VIAGEM_LAZER){
+            radioGroup.check(R.id.lazer);
+        } else {
+            radioGroup.check(R.id.negocios);
+        }
+        destino.setText(cursor.getString(1));
+        String dataChegada = cursor.getString(2);
+        String dataSaida = cursor.getString(3);
+        dataChegadaButton.setText(dataChegada);
+        dataSaidaButton.setText(dataSaida);
+        quantidadePessoas.setText(cursor.getString(4));
+        orcamento.setText(cursor.getString(5));
+        cursor.close();
     }
 
     //fechar conexao com banco
