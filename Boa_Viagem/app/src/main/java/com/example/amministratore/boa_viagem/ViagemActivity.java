@@ -158,6 +158,7 @@ public class ViagemActivity extends AppCompatActivity {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+
         values.put("destino", destino.getText().toString());
         values.put("data_chegada", (String) dataChegadaButton.getText());
         values.put("data_saida", (String) dataSaidaButton.getText());

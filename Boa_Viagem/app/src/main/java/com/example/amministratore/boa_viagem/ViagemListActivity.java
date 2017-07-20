@@ -38,6 +38,7 @@ import static com.example.amministratore.boa_viagem.R.string.orcamento;
 
 public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener , DialogInterface.OnClickListener {
 
+
     private DatabaseHelper helper;
     private SimpleDateFormat dateFormat;
     private Double valorLimite;
@@ -45,54 +46,46 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     private AlertDialog dialogConfirmacao;
     private int viagemSelecionada;
     private AlertDialog alertDialog;
-    private String  dataChegada;
-    private String dataSaida;
-    private String destino;
-    private String quantidadePessoas;
-    private String orcamento;
+    private BoaViagemDAO dao;
 
     // atributo de instancia
     private List<Map<String, Object>> viagens;
     //metodo lista viagens
     private List<Map<String, Object>> listarViagens() {
 
-        SQLiteDatabase db = helper.getReadableDatabase();
-         Cursor cursor = db.rawQuery("SELECT _id, tipo_viagem, destino, " +
-                                    "data_chegada, data_saida, orcamento FROM viagem",
-                null);
-        cursor.moveToFirst();
-
         viagens = new ArrayList<Map<String, Object>>();
 
-        for (int i = 0; i < cursor.getCount(); i++) {
+        List<Viagem> listaViagens = dao.listarViagens();
+
+        for (Viagem viagem : listaViagens) {
+
             Map<String, Object> item = new HashMap<String, Object>();
-            String id = cursor.getString(0);
-            int tipoViagem = cursor.getInt(1);
-            destino = cursor.getString(2);
-            dataChegada = cursor.getString(3);
-            dataSaida = cursor.getString(4);
-            double orcamento = cursor.getDouble(5);
-            item.put("id", id);
-            if (tipoViagem == Constantes.VIAGEM_LAZER) {
+
+            item.put("id", viagem.getId());
+
+            if (viagem.getTipoViagem() == Constantes.VIAGEM_LAZER) {
                 item.put("imagem", R.drawable.lazer);
             } else {
                 item.put("imagem", R.drawable.negocios);
             }
-            item.put("destino", destino);
-             String periodo = dataChegada + " a "
-                    + dataSaida;
+
+            item.put("destino", viagem.getDestino());
+
+            String periodo = dateFormat.format(viagem.getDataChegada()) + " a "
+                    + dateFormat.format(viagem.getDataSaida());
+
             item.put("data", periodo);
-            double totalGasto = calcularTotalGasto(db, id);
+
+            double totalGasto = dao.calcularTotalGasto(viagem);
+
             item.put("total", "Gasto total R$ " + totalGasto);
-            double alerta = orcamento * valorLimite / 100;
-            Double [] valores =
-                    new Double[] { orcamento, alerta, totalGasto };
+
+            double alerta = viagem.getOrcamento() * valorLimite / 100;
+            Double [] valores = new Double[] { viagem.getOrcamento(), alerta, totalGasto };
             item.put("barraProgresso", valores);
             viagens.add(item);
-            cursor.moveToNext();
-        }
-        cursor.close();
 
+        }
         return viagens;
     }
 
@@ -100,6 +93,7 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dao = new BoaViagemDAO(this);
 
         helper = new DatabaseHelper(this);
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
